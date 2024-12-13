@@ -1,0 +1,20 @@
+
+on:
+    push:
+      branches:
+        - main
+        - test
+  
+  jobs:
+    semgrep:
+      name: semgrep/ci
+      runs-on: ubuntu-latest
+      container:
+        image: semgrep/semgrep
+  
+      steps:
+        - uses: actions/checkout@v4
+        - run: semgrep ci
+          env:
+            SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+  
